@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE abatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Abator for iBATIS Configuration 1.0//EN" "http://ibatis.apache.org/dtd/abator-config_1_0.dtd" >
+<abatorConfiguration>
+	<abatorContext>
+    	<commentGenerator>
+    		<property name="suppressDate" value="true" />
+    	</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.2.125:3307/lottery" userId="root" password="hello1234" >
+			<classPathEntry location="E:\mysqldriver-1.0.jar" />
+		</jdbcConnection>
+		<javaModelGenerator targetPackage="com.gandalf.lottery.dao.entity" targetProject="lottery-dao" />
+		<sqlMapGenerator targetPackage="com.gandalf.lottery.dao.sqlmap" targetProject="lottery-dao" />
+		<daoGenerator targetPackage="com.gandalf.lottery.dao" targetProject="lottery-dao" type="spring" />
+    	
+    	<!-- 运营用户 
+    	<table tableName="op_user" domainObjectName="OpUser">
+    		<columnOverride column="user_id" property="userId" javaType="java.lang.Long" jdbcType="BIGINT"/>
+    		<columnOverride column="username" property="username" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    		<columnOverride column="password" property="password" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    		<columnOverride column="real_name" property="realName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    		<columnOverride column="telephone" property="telephone" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    		<columnOverride column="email" property="email" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    		<columnOverride column="department_id" property="departmentId" javaType="java.lang.Long" jdbcType="BIGINT"/>
+    		<columnOverride column="role_id" property="roleId" javaType="java.lang.Long" jdbcType="BIGINT"/>
+    		<columnOverride column="enable" property="enable" javaType="com.gandalf.lottery.common.constant.EnableEnum" jdbcType="TINYINT"/>
+    		<columnOverride column="last_login_time" property="lastLoginTime" javaType="java.util.Date" jdbcType="DATETIME"/>
+    		<columnOverride column="last_login_ip" property="lastLoginIp" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    		<columnOverride column="gmt_create" property="gmtCreate" javaType="java.util.Date" jdbcType="DATETIME"/>
+    		<columnOverride column="gmt_update" property="gmtUpdate" javaType="java.util.Date" jdbcType="DATETIME"/>
+    	</table>
+    	-->
+    	
+    	<!-- 运营权限组 
+    	<table tableName="op_permission_group" domainObjectName="OpPermissionGroup">
+    		<columnOverride column="permission_group_id" property="permissionGroupId" javaType="java.lang.Long" jdbcType="BIGINT"/>
+    		<columnOverride column="group_name" property="groupName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    		<columnOverride column="order_num" property="orderNum" javaType="java.lang.Integer" jdbcType="INT"/>
+    	</table>
+    	-->
+    	
+    	<!-- 运营权限 		     	
+    	<table tableName="op_permission" domainObjectName="OpPermission">
+    		<columnOverride column="permission_id" property="permissionId" javaType="java.lang.Long" jdbcType="BIGINT"/>
+    		<columnOverride column="permission_group_id" property="permissionGroupId" javaType="java.lang.Long" jdbcType="BIGINT"/>
+    		<columnOverride column="permission_name" property="permissionName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    		<columnOverride column="menu_resource_id" property="menuResourceId" javaType="java.lang.Long" jdbcType="BIGINT"/>
+    		<columnOverride column="order_num" property="orderNum" javaType="java.lang.Integer" jdbcType="INT"/>
+    	</table>
+    	-->
+    	
+    	<!-- 运营权限资源 
+    	<table tableName="op_permission_resource" domainObjectName="OpPermissionResource">
+    		<columnOverride column="permission_id" property="permissionId" javaType="java.lang.Long" jdbcType="BIGINT"/>
+    		<columnOverride column="resource_id" property="resourceId" javaType="java.lang.Long" jdbcType="BIGINT"/>
+    	</table>
+    	-->
+    	 
+		<!-- 运营资源     	
+    	<table tableName="op_resource" domainObjectName="OpResource">
+    		<columnOverride column="resource_id" property="resourceId" javaType="java.lang.Long" jdbcType="BIGINT"/>
+    		<columnOverride column="resource_name" property="resourceName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    		<columnOverride column="resource_uri" property="resourceURI" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    	</table>
+    	-->
+    	
+		<!-- 运营角色    	
+    	<table tableName="op_role" domainObjectName="OpRole">
+    		<columnOverride column="role_id" property="roleId" javaType="java.lang.Long" jdbcType="BIGINT"/>
+    		<columnOverride column="role_name" property="roleName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    		<columnOverride column="role_alias" property="roleAlias" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    		<columnOverride column="role_desc" property="roleDesc" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    	</table>
+    	-->
+    	
+    	<!-- 运营角色权限	    	
+    	<table tableName="op_role_permission" domainObjectName="OpRolePermission">
+    		<columnOverride column="role_id" property="roleId" javaType="java.lang.Long" jdbcType="BIGINT"/>
+    		<columnOverride column="permission_id" property="permissionId" javaType="java.lang.Long" jdbcType="BIGINT"/>
+    	</table>
+    	-->
+    	
+    	<!-- 权限URI关系表 -->
+    	<table tableName="op_permission_uri" domainObjectName="OpPermissionURI">
+    		<columnOverride column="permission_id" property="permissionId" javaType="java.lang.Long" jdbcType="BIGINT"/>
+    		<columnOverride column="resource_uri" property="resourceURI" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    	</table>
+	</abatorContext>
+</abatorConfiguration>

@@ -1,0 +1,10 @@
+<!-- Tray -->
+  <div id="tray" class="box">
+    <p class="f-left box">
+		<strong>XXX运营平台</strong> 
+	</p>
+    <p class="f-right">
+		用户: <strong><a href="javascript:void(0)">$!{cookie.get('UK')}</a></strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><a href="${request.contextPath}/logout" id="logout">退出</a></strong>
+	</p>
+  </div>
+  <!--  /tray -->

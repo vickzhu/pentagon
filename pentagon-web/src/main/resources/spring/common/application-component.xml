@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<!-- 
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${emailserver.host}"/>
+		<property name="username" value="${emailserver.username}"/>
+		<property name="password" value="${emailserver.password}"/>
+		<property name="defaultEncoding" value="${emailserver.encoding}"/>
+	</bean>
+	 -->
+	<bean name="sessionConfig" class="com.gandalf.framework.web.session.SessionConfig">
+		<property name="useNativeSession" value="false"></property>
+		<property name="sessionStore" ref="sessionStore"></property>
+		<property name="maxInactiveInterval" value="1800"></property>
+		<property name="cookieEnabled" value="true"></property>
+		<property name="urlEnabled" value="false"></property>
+	</bean>
+	<bean name="sessionStore" class="com.gandalf.framework.web.session.store.CookieStore"></bean>
+	
+</beans>

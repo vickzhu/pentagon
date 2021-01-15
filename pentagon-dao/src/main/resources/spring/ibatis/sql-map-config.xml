@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<settings cacheModelsEnabled="false" enhancementEnabled="false" lazyLoadingEnabled="true" maxRequests="3000" maxSessions="3000" maxTransactions="3000" useStatementNamespaces="true" />
+	
+	<typeHandler javaType="com.gandalf.lottery.common.constant.EnableEnum" callback="com.gandalf.lottery.dao.typehandler.EnableTypeHandler"/>
+	
+	<!-- 权限组-->
+	<sqlMap resource="com/gandalf/lottery/dao/sqlmap/op_permission_group_SqlMap.xml"/>
+	<!-- 权限资源 -->
+	<sqlMap resource="com/gandalf/lottery/dao/sqlmap/op_permission_resource_SqlMap.xml"/>
+	<!-- 权限 -->
+	<sqlMap resource="com/gandalf/lottery/dao/sqlmap/op_permission_SqlMap.xml"/>
+	<!-- 资源 -->
+	<sqlMap resource="com/gandalf/lottery/dao/sqlmap/op_resource_SqlMap.xml"/>
+	<!-- 角色权限 -->
+	<sqlMap resource="com/gandalf/lottery/dao/sqlmap/op_role_permission_SqlMap.xml"/>
+	<!-- 角色 -->
+	<sqlMap resource="com/gandalf/lottery/dao/sqlmap/op_role_SqlMap.xml"/>
+	<!-- 用户 -->
+	<sqlMap resource="com/gandalf/lottery/dao/sqlmap/op_user_SqlMap.xml"/>
+	<!-- 权限URI关系 -->
+	<sqlMap resource="com/gandalf/lottery/dao/sqlmap/op_permission_uri_SqlMap.xml"/>
+</sqlMapConfig>

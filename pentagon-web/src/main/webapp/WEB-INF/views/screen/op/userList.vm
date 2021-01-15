@@ -1,0 +1,122 @@
+<!-- begin::main content -->
+<main class="main-content">
+
+    <div class="container-fluid">
+		
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">用户列表</h5>
+                <div class="table-responsive">
+                    <table class="table">
+                        <caption>List of users</caption>
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Full Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+						#foreach($user in $!{userList})
+                        <tr>
+                            <th scope="row">$velocityCount</th>
+                            <td>${user.first}</td>
+                            <td>${user.last}</td>
+                            <td>
+								#if(${user.first} == "王")
+									隔壁老王
+								#else
+									#SLITERAL(${user.name})
+								#end
+							</td>
+                        </tr>
+						#end
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+	<canvas id="chartjs_two" height="491" width="737" style="display: block; width: 737px; height: 491px;"></canvas>
+</main>
+<!-- begin::global scripts -->
+<script src="assets/vendors/bundle.js"></script>
+<!-- end::global scripts -->
+
+<!-- begin::charts -->
+<script src="assets/vendors/charts/chartjs/chart.min.js"></script>
+<script src="assets/vendors/charts/peity/jquery.peity.min.js"></script>
+<script src="assets/js/examples/charts/chartjs.js"></script>
+<script src="assets/js/examples/charts/peity.js"></script>
+<!-- end::charts -->
+
+<script type="text/javascript">
+function chartjs_two() {
+    var element = document.getElementById("chartjs_two");
+    if (element) {
+        element.height = 200;
+        new Chart(element, {
+            type: 'line',
+            data: {
+                labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+                datasets: [{
+                    data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
+                    label: "Africa11",
+                    borderColor: "#3e95cd",
+                    fill: false
+                }, {
+                    data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 2267],
+                    label: "Asia",
+                    borderColor: "#8e5ea2",
+                    fill: false
+                }, {
+                    data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
+                    label: "Europe",
+                    borderColor: "#3cba9f",
+                    fill: false
+                }, {
+                    data: [40, 120, 110, 16, 24, 38, 74, 167, 508, 784],
+                    label: "Latin America",
+                    borderColor: "#e8c3b9",
+                    fill: false
+                }, {
+                    data: [6, 100, 50, 130, 70, 26, 82, 172, 312, 433],
+                    label: "North America",
+                    borderColor: "#c45850",
+                    fill: false
+                }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'World population per region (in millions)'
+                },
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            color: chartColors.borderColor
+                        },
+                        ticks: {
+                            fontColor: chartColors.fontColor
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            color: chartColors.borderColor
+                        },
+                        ticks: {
+                            fontColor: chartColors.fontColor,
+                            beginAtZero: true
+                        }
+                    }]
+                },
+            }
+        });
+    }
+}
+</script>
+
+<!-- end::main content -->

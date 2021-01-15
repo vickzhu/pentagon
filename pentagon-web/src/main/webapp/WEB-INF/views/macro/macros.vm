@@ -1,0 +1,15 @@
+#macro(showEnable $enable)
+	#if($enable == 'Y')
+		<font color="green">启用</font>
+	#else
+		<font color="red">禁用</font>
+	#end
+#end
+	
+#macro( select $selectValue $dataList )
+	<select class="form-control form-control-lg">
+        #foreach( $data in $dataList )
+            <option #if($selected == $data)selected #end >$data</option>
+    	#end
+	</select>
+#end
