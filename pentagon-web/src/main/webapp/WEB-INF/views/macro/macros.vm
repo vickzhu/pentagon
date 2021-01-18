@@ -5,6 +5,8 @@
 		<font color="red">禁用</font>
 	#end
 #end
+
+#macro(resources $url)#springUrl("/resources/$url")#end
 	
 #macro( select $selectValue $dataList )
 	<select class="form-control form-control-lg">

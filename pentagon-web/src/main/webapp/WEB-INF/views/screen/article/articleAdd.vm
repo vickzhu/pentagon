@@ -68,6 +68,7 @@
                             <div class="form-group row">
                                 <div class="col-sm-10">
                                     <button type="submit" class="btn btn-primary">保存</button>
+									<button type="button" class="btn btn-primary" onclick="window.location.href='#springUrl('/article/all')'">取消</button>
                                 </div>
                             </div>
                         </form>
@@ -82,4 +83,9 @@
 <!-- begin::CKEditor -->
 <script src="assets/vendors/ckeditor/ckeditor.js"></script>
 <script src="assets/js/examples/ckeditor.js"></script>
+<script type="text/javascript">
+    if($('#editor-news').length) {
+        CKEDITOR.replace('editor-news');
+    }
+</script>
 <!-- end::CKEditor -->

@@ -1,4 +1,14 @@
 <!-- begin::main content -->
+<style type="text/css">
+.col-form-label {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 1px);
+	padding-left: calc(.375rem + 15px);
+    margin-bottom: 0;
+    font-size: inherit;
+    line-height: 1.5;
+}
+</style>
 <main class="main-content">
 	<div class="container-fluid">
         <!-- begin::page header -->
@@ -63,17 +73,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-								#foreach($record in $p.records)
+								#foreach($record in $page.records)
                                 <tr>
                                     <th scope="row">${record.id}</th>
                                     <td>${record.category}</td>
                                     <td><a href="javascript:void(0);" target="_blank">${record.title}</a></td>
 									<td>${record.userId}</td>
-                                    <td>${record.createTime}</td>
+                                    <td>$!{date.format("yy-MM-dd HH:mm:ss",${record.createTime})}</td>
                                 </tr>
 								#end
                                 </tbody>
                             </table>
+							<div id="page_nav"></div>
                         </div>
                     </div>
                 </div>
@@ -82,3 +93,15 @@
     </div>
 </main>
 <!-- end::main content -->
+<script src="#resources('js/pagination.js')"></script>
+<script type="text/javascript">
+	function gotoPage(pageNo){
+		go(pageNo);
+	}
+	function go(pageNo){
+		$("#curPage").val(pageNo);
+		window.location.href="#springUrl('/article/all')?curPage="+pageNo;
+	}
+	$('#page_nav').html(new Pagination($!{page.curPage},$!{page.totalPages}, gotoPage).getHtml());
+	
+</script>

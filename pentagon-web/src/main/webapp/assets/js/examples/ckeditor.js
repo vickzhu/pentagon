@@ -1,8 +1,8 @@
 'use strict';
 $(document).ready(function () {
 
-    if($('#editor-news').length) {
-        CKEDITOR.replace('editor-news');
+    if($('#editor-demo1').length) {
+        CKEDITOR.replace('editor-demo1');
     }
 
     if($('#editor-demo2').length) {
