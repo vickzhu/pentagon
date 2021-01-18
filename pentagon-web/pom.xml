@@ -7,7 +7,15 @@
   </parent>
   <artifactId>pentagon-web</artifactId>
   <packaging>war</packaging>
+  <properties>
+  	<druid.version>1.0.1</druid.version>
+  </properties>
   <dependencies>
+  	<dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>${druid.version}</version>
+    </dependency>
   	<dependency>
   		<groupId>${project.groupId}</groupId>
   		<artifactId>pentagon-biz</artifactId>

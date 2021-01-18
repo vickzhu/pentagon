@@ -1,8 +1,8 @@
 package com.pentagon.web.news.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -11,11 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pentagon.biz.dao.model.Article;
+import com.pentagon.biz.dao.model.ArticleCategory;
+import com.pentagon.biz.service.ArticleCategoryService;
+import com.pentagon.biz.service.ArticleService;
 import com.pentagon.web.controller.BaseController;
 
 @Controller
 @RequestMapping("/article")
 public class ArticleController extends BaseController {
+	
+	@Resource
+	private ArticleService articleService;
+	@Resource
+	private ArticleCategoryService categoryService;
 
 	/**
 	 * 查看所有
@@ -48,10 +57,9 @@ public class ArticleController extends BaseController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView add(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("article/articleAdd");
-		List<String> categoryList = new ArrayList<String>();
-		
-		mav.addObject("categoryList", categoryList);
+		List<ArticleCategory> acList = categoryService.selectByExample(null);
+		ModelAndView mav = new ModelAndView("article/articleAdd");		
+		mav.addObject("categoryList", acList);
 		return mav;
 	}
 	
@@ -67,8 +75,14 @@ public class ArticleController extends BaseController {
 		Integer display = Integer.valueOf(request.getParameter("display"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		
-		return new ModelAndView();
+		Article a = new Article();
+		a.setCategory(category);
+		a.setContent(content);
+		a.setDisplay(display);
+		a.setTitle(title);
+		a.setUserId(null);
+		articleService.insert(a);
+		return new ModelAndView("article/articleList");
 	}
 	
 	/**
