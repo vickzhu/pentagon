@@ -10,7 +10,7 @@
   <dependencies>
   	<dependency>
   		<groupId>${project.groupId}</groupId>
-  		<artifactId>pentagon-service</artifactId>
+  		<artifactId>pentagon-biz</artifactId>
   		<version>${project.version}</version>
   	</dependency>
   	<!-- 邮件发送 -->
