@@ -1,0 +1,84 @@
+<!-- begin::main content -->
+<main class="main-content">
+	<div class="container-fluid">
+        <!-- begin::page header -->
+        <div class="page-header d-md-flex justify-content-between align-items-center">
+            <h4>资讯列表</h4>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb m-t-0">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Basic Form</li>
+                </ol>
+            </nav>
+        </div>
+        <!-- end::page header -->
+		<div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="#springUrl('/article/all')" method="get">
+    						<div class="form-group row" >
+                                <label for="category" class="col-form-label">分类:</label>
+    							<div class="col-sm-2">
+                                    <select class="form-control" id="category" name="category">
+    									<option value="0">请选择</option>
+    									#foreach($c in $categoryList)
+                                        <option value="${c.id}">${c.category}</option>
+    									#end
+                                    </select>
+                                </div>
+								<label for="title" class="col-form-label">标题:</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                                </div>
+								<label for="title" class="col-form-label">是否发布:</label>
+								<div class="col-sm-2">
+									<select class="form-control" id="publish" name="publish">
+										<option value="">全部</option>
+										<option value="0">不发布</option>
+										<option value="1">发布</option>
+                                    </select>
+                                </div>
+								<div class="col-sm-2">
+                                    <button type="submit" class="btn btn-primary">确认</button>
+									<button type="button" class="btn btn-primary" onclick="window.location.href='#springUrl('/article/')'">新增</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+           
+                <div class="card">
+                    <div class="card-body">						
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">分类</th>
+                                    <th scope="col">标题</th>
+									<th scope="col">发布人</th>
+                                    <th scope="col">发布时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+								#foreach($record in $p.records)
+                                <tr>
+                                    <th scope="row">${record.id}</th>
+                                    <td>${record.category}</td>
+                                    <td><a href="javascript:void(0);" target="_blank">${record.title}</a></td>
+									<td>${record.userId}</td>
+                                    <td>${record.createTime}</td>
+                                </tr>
+								#end
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->

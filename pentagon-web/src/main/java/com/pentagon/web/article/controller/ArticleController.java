@@ -1,4 +1,4 @@
-package com.pentagon.web.news.controller;
+package com.pentagon.web.article.controller;
 
 import java.util.List;
 
@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gandalf.framework.web.tool.Page;
 import com.pentagon.biz.dao.model.Article;
 import com.pentagon.biz.dao.model.ArticleCategory;
+import com.pentagon.biz.dao.model.ArticleExample;
 import com.pentagon.biz.service.ArticleCategoryService;
 import com.pentagon.biz.service.ArticleService;
 import com.pentagon.web.controller.BaseController;
@@ -33,8 +35,15 @@ public class ArticleController extends BaseController {
 	 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ModelAndView all(HttpServletRequest request) {
-		
-		return new ModelAndView();
+		int curPage = 1;
+		int cpp = 25;
+		Page<Article> page = new Page<Article>(curPage, cpp);
+		ArticleExample example = new ArticleExample();
+		example.setOrderByClause("id desc");
+		articleService.selectByPagination(example, page);
+		ModelAndView mav = new ModelAndView("article/articleList");
+		mav.addObject("p", page);
+		return mav;
 	}
 	
 	/**
@@ -70,7 +79,7 @@ public class ArticleController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public ModelAndView doAdd(HttpServletRequest request) {
+	public String doAdd(HttpServletRequest request) {
 		Integer category = Integer.valueOf(request.getParameter("category"));
 		Integer display = Integer.valueOf(request.getParameter("display"));
 		String title = request.getParameter("title");
@@ -81,8 +90,8 @@ public class ArticleController extends BaseController {
 		a.setDisplay(display);
 		a.setTitle(title);
 		a.setUserId(null);
-		articleService.insert(a);
-		return new ModelAndView("article/articleList");
+		articleService.insertSelective(a);
+		return "redirect:/article/all";
 	}
 	
 	/**
