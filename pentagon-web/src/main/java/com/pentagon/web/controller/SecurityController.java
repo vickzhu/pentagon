@@ -42,6 +42,13 @@ public class SecurityController {
 //        	
 //        }
 //        ModelAndView mav = new ModelAndView("dashboard");
+        request.getSession().setAttribute("user", "111");
         return "redirect:dashboard";
+    }
+    
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+    	request.getSession(false).invalidate();
+    	return "redirect:login";
     }
 }

@@ -36,12 +36,10 @@
 		     <mapping path="/**"/>
 		     <beans:ref bean="i18nInterceptor"/>
 		 </interceptor>
-		 <!-- 
 		 <interceptor>
 		     <mapping path="/**"/>
 		     <beans:ref bean="permissionInterceptor"/>
 		 </interceptor>
-		  -->
 	</interceptors>
 	<beans:bean id="permissionInterceptor" class="com.pentagon.web.interceptor.PermissionInterceptor">
 		<beans:property name="anonymousUri">

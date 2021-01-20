@@ -13,6 +13,16 @@
     	<listener-class>com.gandalf.framework.web.context.GandalfContextLoaderListener</listener-class>
   	</listener>
   	<filter>
+		<filter-name>springSessionRepositoryFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSessionRepositoryFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+  	<filter>
   	    <description>字符编码</description>
     	<filter-name>encodingFilter</filter-name>
     	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -43,6 +53,10 @@
   	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>/resources/*</url-pattern>
+  	</servlet-mapping>
+  	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/assets/*</url-pattern>
   	</servlet-mapping>
   	<servlet-mapping>
       	<servlet-name>default</servlet-name>

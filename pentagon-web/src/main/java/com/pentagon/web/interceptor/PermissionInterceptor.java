@@ -7,6 +7,7 @@ package com.pentagon.web.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
@@ -43,10 +44,15 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
         for (String exculdeURI : anonymousUri) {
             exculdeURI = contextPath + exculdeURI;
             if (matcher.match(exculdeURI, requestURI)) {
-                return true;
+                return Boolean.TRUE;
             }
         }
-        return false;
+        Object user = request.getSession().getAttribute("user");
+        if(user != null) {
+        	return Boolean.TRUE;
+        }
+        response.sendRedirect(request.getContextPath()+"/login");
+        return Boolean.FALSE;
     }
 
     /*
