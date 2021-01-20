@@ -325,52 +325,52 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andCategoryEqualTo(Integer value) {
+        public Criteria andCategoryEqualTo(Long value) {
             addCriterion("category =", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryNotEqualTo(Integer value) {
+        public Criteria andCategoryNotEqualTo(Long value) {
             addCriterion("category <>", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryGreaterThan(Integer value) {
+        public Criteria andCategoryGreaterThan(Long value) {
             addCriterion("category >", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryGreaterThanOrEqualTo(Integer value) {
+        public Criteria andCategoryGreaterThanOrEqualTo(Long value) {
             addCriterion("category >=", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryLessThan(Integer value) {
+        public Criteria andCategoryLessThan(Long value) {
             addCriterion("category <", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryLessThanOrEqualTo(Integer value) {
+        public Criteria andCategoryLessThanOrEqualTo(Long value) {
             addCriterion("category <=", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryIn(List<Integer> values) {
+        public Criteria andCategoryIn(List<Long> values) {
             addCriterion("category in", values, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryNotIn(List<Integer> values) {
+        public Criteria andCategoryNotIn(List<Long> values) {
             addCriterion("category not in", values, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryBetween(Integer value1, Integer value2) {
+        public Criteria andCategoryBetween(Long value1, Long value2) {
             addCriterion("category between", value1, value2, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryNotBetween(Integer value1, Integer value2) {
+        public Criteria andCategoryNotBetween(Long value1, Long value2) {
             addCriterion("category not between", value1, value2, "category");
             return (Criteria) this;
         }

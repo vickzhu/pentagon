@@ -1,6 +1,8 @@
 package com.pentagon.web.article.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -42,13 +44,18 @@ public class ArticleController extends BaseController {
 			curPage = Integer.valueOf(curPageStr);
 		}
 		int cpp = 10;
-		List<ArticleCategory> acList = categoryService.selectByExample(null);
+		List<ArticleCategory> acList = categoryService.selectAllFromCache();
+		Map<Long, String> acMap = new HashMap<Long, String>();
+		for (ArticleCategory articleCategory : acList) {
+			acMap.put(articleCategory.getId(), articleCategory.getCategory());
+		}
 		Page<Article> page = new Page<Article>(curPage, cpp);
 		ArticleExample example = new ArticleExample();
 		example.setOrderByClause("id desc");
 		articleService.selectByPagination(example, page);
 		ModelAndView mav = new ModelAndView("article/articleList");
 		mav.addObject("page", page);
+		mav.addObject("categoryMap", acMap);
 		mav.addObject("categoryList", acList);
 		return mav;
 	}
@@ -87,7 +94,7 @@ public class ArticleController extends BaseController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String doAdd(HttpServletRequest request) {
-		Integer category = Integer.valueOf(request.getParameter("category"));
+		Long category = Long.valueOf(request.getParameter("category"));
 		Integer display = Integer.valueOf(request.getParameter("display"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");

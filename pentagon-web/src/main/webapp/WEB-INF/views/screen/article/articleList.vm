@@ -76,7 +76,7 @@
 								#foreach($record in $page.records)
                                 <tr>
                                     <th scope="row">${record.id}</th>
-                                    <td>${record.category}</td>
+                                    <td>$!{categoryMap.get(${record.category})}</td>
                                     <td><a href="javascript:void(0);" target="_blank">${record.title}</a></td>
 									<td>${record.userId}</td>
                                     <td>$!{date.format("yy-MM-dd HH:mm:ss",${record.createTime})}</td>

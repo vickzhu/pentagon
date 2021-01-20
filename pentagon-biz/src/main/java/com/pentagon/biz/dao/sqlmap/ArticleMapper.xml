@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="trade_date" property="tradeDate" jdbcType="VARCHAR" />
-    <result column="category" property="category" jdbcType="INTEGER" />
+    <result column="category" property="category" jdbcType="BIGINT" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="display" property="display" jdbcType="INTEGER" />
@@ -113,7 +113,7 @@
     insert into article (user_id, trade_date, category, 
       title, content, display, 
       create_time, update_time)
-    values (#{userId,jdbcType=BIGINT}, #{tradeDate,jdbcType=VARCHAR}, #{category,jdbcType=INTEGER}, 
+    values (#{userId,jdbcType=BIGINT}, #{tradeDate,jdbcType=VARCHAR}, #{category,jdbcType=BIGINT}, 
       #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{display,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
@@ -156,7 +156,7 @@
         #{tradeDate,jdbcType=VARCHAR},
       </if>
       <if test="category != null" >
-        #{category,jdbcType=INTEGER},
+        #{category,jdbcType=BIGINT},
       </if>
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
@@ -194,7 +194,7 @@
         trade_date = #{record.tradeDate,jdbcType=VARCHAR},
       </if>
       <if test="record.category != null" >
-        category = #{record.category,jdbcType=INTEGER},
+        category = #{record.category,jdbcType=BIGINT},
       </if>
       <if test="record.title != null" >
         title = #{record.title,jdbcType=VARCHAR},
@@ -221,7 +221,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
       trade_date = #{record.tradeDate,jdbcType=VARCHAR},
-      category = #{record.category,jdbcType=INTEGER},
+      category = #{record.category,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=VARCHAR},
       display = #{record.display,jdbcType=INTEGER},
@@ -241,7 +241,7 @@
         trade_date = #{tradeDate,jdbcType=VARCHAR},
       </if>
       <if test="category != null" >
-        category = #{category,jdbcType=INTEGER},
+        category = #{category,jdbcType=BIGINT},
       </if>
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
@@ -265,7 +265,7 @@
     update article
     set user_id = #{userId,jdbcType=BIGINT},
       trade_date = #{tradeDate,jdbcType=VARCHAR},
-      category = #{category,jdbcType=INTEGER},
+      category = #{category,jdbcType=BIGINT},
       title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       display = #{display,jdbcType=INTEGER},

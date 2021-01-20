@@ -9,7 +9,7 @@ public class Article {
 
     private String tradeDate;
 
-    private Integer category;
+    private Long category;
 
     private String title;
 
@@ -45,11 +45,11 @@ public class Article {
         this.tradeDate = tradeDate == null ? null : tradeDate.trim();
     }
 
-    public Integer getCategory() {
+    public Long getCategory() {
         return category;
     }
 
-    public void setCategory(Integer category) {
+    public void setCategory(Long category) {
         this.category = category;
     }
 
