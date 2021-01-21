@@ -46,6 +46,7 @@
 			<beans:array>
 				<beans:value>/</beans:value>
 				<beans:value>/login</beans:value>
+				<beans:value>/register</beans:value>
 				<beans:value>/captcha/**</beans:value>
 			</beans:array>
 		</beans:property>

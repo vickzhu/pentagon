@@ -33,7 +33,7 @@ public class CaptchaController {
         response.setContentType("image/jpeg");
         ServletOutputStream out = response.getOutputStream();
         String captchaCode = CaptchaUtil.generateVerifyCode(4);
-        CaptchaUtil.outputImage(100, 30, out, captchaCode);
+        CaptchaUtil.outputImage(100, 36, out, captchaCode);
         request.getSession().setAttribute("captcha", captchaCode);
         try {
             out.flush();

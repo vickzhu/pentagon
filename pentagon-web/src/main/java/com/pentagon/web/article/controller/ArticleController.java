@@ -18,6 +18,7 @@ import com.gandalf.framework.web.tool.Page;
 import com.pentagon.biz.dao.model.Article;
 import com.pentagon.biz.dao.model.ArticleCategory;
 import com.pentagon.biz.dao.model.ArticleExample;
+import com.pentagon.biz.dao.model.User;
 import com.pentagon.biz.service.ArticleCategoryService;
 import com.pentagon.biz.service.ArticleService;
 import com.pentagon.web.controller.BaseController;
@@ -103,7 +104,8 @@ public class ArticleController extends BaseController {
 		a.setContent(content);
 		a.setDisplay(display);
 		a.setTitle(title);
-		a.setUserId(null);
+		User user = (User)request.getSession().getAttribute("user");
+		a.setUserId(user.getId());
 		articleService.insertSelective(a);
 		return "redirect:/article/all";
 	}
