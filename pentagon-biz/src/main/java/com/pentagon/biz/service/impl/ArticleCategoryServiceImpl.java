@@ -40,12 +40,11 @@ public class ArticleCategoryServiceImpl extends BaseServiceImpl<ArticleCategory,
 		if(lock.tryLock()) {
 			try {
 				List<ArticleCategory> result = mapper.selectByExample(null);
-				expireTime = currentTime + 300000;
-				ArticleCategoryCache.refreshCache(expireTime, result);
-			}finally {
+				ArticleCategoryCache.refreshCache(result);
+			} finally {
 				lock.unlock();
 			}
-		}		
+		}
 		return ArticleCategoryCache.getAcList();
 	}
 

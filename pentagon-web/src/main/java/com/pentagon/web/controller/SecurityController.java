@@ -88,7 +88,7 @@ public class SecurityController {
         user.setEnable(1);
         user.setLastLoginIp(RequestUtil.getIp(request));
         user.setLastLoginTime(new Date());
-        userService.insert(user);
+        userService.insertSelective(user);
         return "redirect:login";
     }
     
