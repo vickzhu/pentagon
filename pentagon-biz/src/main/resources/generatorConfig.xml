@@ -3,14 +3,14 @@
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"> 
 <generatorConfiguration> 
 
-	<classPathEntry location="C:\Users\zoey\.m2\repository\mysql\mysql-connector-java\5.1.32\mysql-connector-java-5.1.32.jar"/>
+	<classPathEntry location="C:\Users\vick.zhu\.m2\repository\mysql\mysql-connector-java\5.1.32\mysql-connector-java-5.1.32.jar"/>
 	<context id="spider-biz" targetRuntime="MyBatis3"> 
 		<plugin type="com.gandalf.mybatis.plugin.PaginationPlugin"></plugin>
 		<commentGenerator>   
 		    <property name="suppressAllComments" value="true" />      
 		</commentGenerator>  
 		    
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://10.1.2.22:3306/pentagon?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false" userId="root" password="root"> </jdbcConnection> 
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://10.1.1.150:3306/tp?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false" userId="service" password="service"> </jdbcConnection> 
 		
 		<javaTypeResolver> 
 			<property name="forceBigDecimals" value="false"/> 
@@ -32,224 +32,29 @@
 			<property name="enableSubPackages" value="true"/> 
 			<property name="rootInterface" value="com.gandalf.framework.mybatis.BaseMapper"/>
 		</javaClientGenerator> 
-		 
-		<!-- 
-		<table tableName="company" domainObjectName="Company"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		 
-		<table tableName="big_vol_statis" domainObjectName="BigVolStatis"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="banker_trace" domainObjectName="BankerTrace"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="long_hu" domainObjectName="LongHu"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="long_hu_detail" domainObjectName="LongHuDetail"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="long_hu_type" domainObjectName="LongHuType"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="sec_company" domainObjectName="SecCompany"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		<table tableName="province" domainObjectName="Province"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="sec_dept" domainObjectName="SecDept"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="clique" domainObjectName="Clique"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="clique_stock" domainObjectName="CliqueStock"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="shareholder" domainObjectName="ShareHolder"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="stock_shareholder" domainObjectName="StockShareHolder"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="large_vol" domainObjectName="LargeVol"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="clique_dept" domainObjectName="CliqueDept"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="five_range_statis" domainObjectName="FiveRangeStatis"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="large_vol_statis" domainObjectName="LargeVolStatis"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table> 
-		
-		<table tableName="holder_num" domainObjectName="HolderNum"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="upper_shadow" domainObjectName="UpperShadow"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="jd_statis" domainObjectName="JdStatis"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="stock_diary" domainObjectName="StockDiary"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="stock_name_initial" domainObjectName="StockNameInitial"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="my_follow_dept" domainObjectName="MyFollowDept"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="synergy" domainObjectName="Synergy"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="synergy_detail" domainObjectName="SynergyDetail"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-
-		<table tableName="k_line" domainObjectName="KLine"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>		
-		
-		<table tableName="active_dept_operation" domainObjectName="ActiveDeptOperation"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="bidding" domainObjectName="Bidding"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="holiday" domainObjectName="Holiday"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="lian_ban" domainObjectName="LianBan"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		<table tableName="lian_ban_plate" domainObjectName="LianBanPlate"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
-		<table tableName="news_type" domainObjectName="NewsType"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		<table tableName="news" domainObjectName="News"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		<table tableName="rmtb_firebase_token" domainObjectName="FirebaseToken"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		<table tableName="rmtb_firebase_message" domainObjectName="FirebaseMessage"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		<table tableName="article" domainObjectName="Article"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		<table tableName="article_category" domainObjectName="ArticleCategory"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		-->
+		 <!-- 
 		<table tableName="user" domainObjectName="User"> 
+			<property name="suppressAllComments" value="true"/> 
+		    <property name="suppressDate" value="true"/>
+		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+		</table>
+		<table tableName="role" domainObjectName="Role"> 
+			<property name="suppressAllComments" value="true"/> 
+		    <property name="suppressDate" value="true"/>
+		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+		</table>
+		<table tableName="user_role" domainObjectName="UserRole"> 
+			<property name="suppressAllComments" value="true"/> 
+		    <property name="suppressDate" value="true"/>
+		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+		</table>
+		<table tableName="role_resource" domainObjectName="RoleResource"> 
+			<property name="suppressAllComments" value="true"/> 
+		    <property name="suppressDate" value="true"/>
+		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+		</table>
+		 -->
+		 <table tableName="resource" domainObjectName="Resource"> 
 			<property name="suppressAllComments" value="true"/> 
 		    <property name="suppressDate" value="true"/>
 		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>

@@ -1,24 +1,15 @@
 package com.pentagon.biz.dao.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {
-	
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5337046903541840757L;
-
-	private Long id;
+public class User {
+    private Long id;
 
     private String username;
 
     private String password;
 
     private String nickname;
-
-    private Long roleId;
 
     private String email;
 
@@ -32,9 +23,11 @@ public class User implements Serializable {
 
     private String lastLoginIp;
 
-    private Date createTime;
+    private Long creator;
 
-    private Date updateTime;
+    private Date createdate;
+
+    private Date updatedate;
 
     public Long getId() {
         return id;
@@ -66,14 +59,6 @@ public class User implements Serializable {
 
     public void setNickname(String nickname) {
         this.nickname = nickname == null ? null : nickname.trim();
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
     }
 
     public String getEmail() {
@@ -124,19 +109,27 @@ public class User implements Serializable {
         this.lastLoginIp = lastLoginIp == null ? null : lastLoginIp.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Long getCreator() {
+        return creator;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreator(Long creator) {
+        this.creator = creator;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getCreatedate() {
+        return createdate;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
+    }
+
+    public Date getUpdatedate() {
+        return updatedate;
+    }
+
+    public void setUpdatedate(Date updatedate) {
+        this.updatedate = updatedate;
     }
 }

@@ -15,6 +15,7 @@
                             <th scope="col">First</th>
                             <th scope="col">Last</th>
                             <th scope="col">Full Name</th>
+							<th scope="col">Operation</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -24,11 +25,10 @@
                             <td>${user.first}</td>
                             <td>${user.last}</td>
                             <td>
-								#if(${user.first} == "王")
-									隔壁老王
-								#else
-									#SLITERAL(${user.name})
-								#end
+								#SLITERAL(${user.name})
+							</td>
+							<td>
+							<a href="javascript:;">角色分配</a>
 							</td>
                         </tr>
 						#end
