@@ -1,9 +1,13 @@
 package com.pentagon.biz.dao.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
-    private Long id;
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 1047056497821626285L;
+
+	private Long id;
 
     private String username;
 
