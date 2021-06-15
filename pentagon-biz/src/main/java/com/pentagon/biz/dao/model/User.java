@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class User implements Serializable {
 
-	private static final long serialVersionUID = 1047056497821626285L;
+	private static final long serialVersionUID = 1047056497821626285l;
 
 	private Long id;
 
@@ -29,9 +29,9 @@ public class User implements Serializable {
 
     private Long creator;
 
-    private Date createdate;
+    private Date createDate;
 
-    private Date updatedate;
+    private Date updateDate;
 
     public Long getId() {
         return id;
@@ -121,19 +121,19 @@ public class User implements Serializable {
         this.creator = creator;
     }
 
-    public Date getCreatedate() {
-        return createdate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getUpdatedate() {
-        return updatedate;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUpdatedate(Date updatedate) {
-        this.updatedate = updatedate;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 }

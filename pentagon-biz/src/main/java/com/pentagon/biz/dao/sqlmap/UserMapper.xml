@@ -13,8 +13,8 @@
     <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
     <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
     <result column="creator" jdbcType="BIGINT" property="creator" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createdate" />
-    <result column="updateDate" jdbcType="TIMESTAMP" property="updatedate" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -76,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, username, password, nickname, email, phone, dept_id, enable, last_login_time, 
-    last_login_ip, creator, createDate, updateDate
+    last_login_ip, creator, create_date, update_date
   </sql>
   <select id="selectByExample" parameterType="com.pentagon.biz.dao.model.UserExample" resultMap="BaseResultMap">
     select
@@ -118,12 +118,12 @@
     insert into user (username, password, nickname, 
       email, phone, dept_id, 
       enable, last_login_time, last_login_ip, 
-      creator, createDate, updateDate
+      creator, create_date, update_date
       )
     values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{deptId,jdbcType=BIGINT}, 
       #{enable,jdbcType=INTEGER}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{lastLoginIp,jdbcType=VARCHAR}, 
-      #{creator,jdbcType=BIGINT}, #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP}
+      #{creator,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.pentagon.biz.dao.model.User">
@@ -162,11 +162,11 @@
       <if test="creator != null">
         creator,
       </if>
-      <if test="createdate != null">
-        createDate,
+      <if test="createDate != null">
+        create_date,
       </if>
-      <if test="updatedate != null">
-        updateDate,
+      <if test="updateDate != null">
+        update_date,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -200,11 +200,11 @@
       <if test="creator != null">
         #{creator,jdbcType=BIGINT},
       </if>
-      <if test="createdate != null">
-        #{createdate,jdbcType=TIMESTAMP},
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatedate != null">
-        #{updatedate,jdbcType=TIMESTAMP},
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -250,11 +250,11 @@
       <if test="record.creator != null">
         creator = #{record.creator,jdbcType=BIGINT},
       </if>
-      <if test="record.createdate != null">
-        createDate = #{record.createdate,jdbcType=TIMESTAMP},
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.updatedate != null">
-        updateDate = #{record.updatedate,jdbcType=TIMESTAMP},
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -274,8 +274,8 @@
       last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
       last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
       creator = #{record.creator,jdbcType=BIGINT},
-      createDate = #{record.createdate,jdbcType=TIMESTAMP},
-      updateDate = #{record.updatedate,jdbcType=TIMESTAMP}
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -313,11 +313,11 @@
       <if test="creator != null">
         creator = #{creator,jdbcType=BIGINT},
       </if>
-      <if test="createdate != null">
-        createDate = #{createdate,jdbcType=TIMESTAMP},
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatedate != null">
-        updateDate = #{updatedate,jdbcType=TIMESTAMP},
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -334,8 +334,8 @@
       last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
       creator = #{creator,jdbcType=BIGINT},
-      createDate = #{createdate,jdbcType=TIMESTAMP},
-      updateDate = #{updatedate,jdbcType=TIMESTAMP}
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

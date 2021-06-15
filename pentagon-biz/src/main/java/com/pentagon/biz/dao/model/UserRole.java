@@ -9,9 +9,9 @@ public class UserRole {
 
     private Long roleId;
 
-    private Long createby;
+    private Long creator;
 
-    private Date createdate;
+    private Date createDate;
 
     public Long getId() {
         return id;
@@ -37,19 +37,19 @@ public class UserRole {
         this.roleId = roleId;
     }
 
-    public Long getCreateby() {
-        return createby;
+    public Long getCreator() {
+        return creator;
     }
 
-    public void setCreateby(Long createby) {
-        this.createby = createby;
+    public void setCreator(Long creator) {
+        this.creator = creator;
     }
 
-    public Date getCreatedate() {
-        return createdate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

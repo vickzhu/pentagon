@@ -9,9 +9,9 @@ public class Role {
 
     private Integer enable;
 
-    private Date createdate;
+    private Date createDate;
 
-    private Date updatedate;
+    private Date updateDate;
 
     public Long getId() {
         return id;
@@ -37,19 +37,19 @@ public class Role {
         this.enable = enable;
     }
 
-    public Date getCreatedate() {
-        return createdate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getUpdatedate() {
-        return updatedate;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUpdatedate(Date updatedate) {
-        this.updatedate = updatedate;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 }

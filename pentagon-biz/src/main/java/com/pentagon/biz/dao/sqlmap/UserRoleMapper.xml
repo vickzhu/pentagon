@@ -5,8 +5,8 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="role_id" jdbcType="BIGINT" property="roleId" />
-    <result column="createBy" jdbcType="BIGINT" property="createby" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, role_id, createBy, createDate
+    id, user_id, role_id, creator, create_date
   </sql>
   <select id="selectByExample" parameterType="com.pentagon.biz.dao.model.UserRoleExample" resultMap="BaseResultMap">
     select
@@ -106,10 +106,10 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user_role (user_id, role_id, createBy, 
-      createDate)
-    values (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{createby,jdbcType=BIGINT}, 
-      #{createdate,jdbcType=TIMESTAMP})
+    insert into user_role (user_id, role_id, creator, 
+      create_date)
+    values (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.pentagon.biz.dao.model.UserRole">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -123,11 +123,11 @@
       <if test="roleId != null">
         role_id,
       </if>
-      <if test="createby != null">
-        createBy,
+      <if test="creator != null">
+        creator,
       </if>
-      <if test="createdate != null">
-        createDate,
+      <if test="createDate != null">
+        create_date,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -137,11 +137,11 @@
       <if test="roleId != null">
         #{roleId,jdbcType=BIGINT},
       </if>
-      <if test="createby != null">
-        #{createby,jdbcType=BIGINT},
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
       </if>
-      <if test="createdate != null">
-        #{createdate,jdbcType=TIMESTAMP},
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -163,11 +163,11 @@
       <if test="record.roleId != null">
         role_id = #{record.roleId,jdbcType=BIGINT},
       </if>
-      <if test="record.createby != null">
-        createBy = #{record.createby,jdbcType=BIGINT},
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=BIGINT},
       </if>
-      <if test="record.createdate != null">
-        createDate = #{record.createdate,jdbcType=TIMESTAMP},
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -179,8 +179,8 @@
     set id = #{record.id,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
       role_id = #{record.roleId,jdbcType=BIGINT},
-      createBy = #{record.createby,jdbcType=BIGINT},
-      createDate = #{record.createdate,jdbcType=TIMESTAMP}
+      creator = #{record.creator,jdbcType=BIGINT},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -194,11 +194,11 @@
       <if test="roleId != null">
         role_id = #{roleId,jdbcType=BIGINT},
       </if>
-      <if test="createby != null">
-        createBy = #{createby,jdbcType=BIGINT},
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
       </if>
-      <if test="createdate != null">
-        createDate = #{createdate,jdbcType=TIMESTAMP},
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -207,8 +207,8 @@
     update user_role
     set user_id = #{userId,jdbcType=BIGINT},
       role_id = #{roleId,jdbcType=BIGINT},
-      createBy = #{createby,jdbcType=BIGINT},
-      createDate = #{createdate,jdbcType=TIMESTAMP}
+      creator = #{creator,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
