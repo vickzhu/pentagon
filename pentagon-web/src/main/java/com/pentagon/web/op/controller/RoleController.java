@@ -54,6 +54,25 @@ public class RoleController extends BaseController {
 		int count = roleService.insertSelective(role);
 		return new AjaxResult(count == 1, null);
 	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(HttpServletRequest request, @RequestParam Long roleId) {
+		Role role = roleService.selectByPrimaryKey(roleId);
+		ModelAndView mav = new ModelAndView("op/roleEdit");
+		mav.addObject("role", role);
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public AjaxResult doEdit(HttpServletRequest request) {
+		Role role = new Role();
+		role.setId(Long.valueOf(request.getParameter("roleId")));
+		role.setRoleName(request.getParameter("roleName"));
+		role.setEnable(Integer.valueOf(request.getParameter("enable")));
+		int count = roleService.updateByPrimaryKeySelective(role);
+		return new AjaxResult(count == 1, null);
+	}
 
 	@RequestMapping(value = "/resources", method = RequestMethod.GET)
 	public ModelAndView roleResource(HttpServletRequest request,@RequestParam Long roleId) {

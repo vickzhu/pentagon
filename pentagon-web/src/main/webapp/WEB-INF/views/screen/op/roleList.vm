@@ -39,8 +39,18 @@
                                     <th scope="row">$!{role.id}</th>
                                     <td>$!{role.roleName}</td>
                                     <td>$!{role.enable}</td>
-									<td>$!{role.createDate}</td>
-                                    <td>编辑</td>
+									<td>$!{date.format('yyyy-MM-dd HH:mm:ss',$!{role.createDate})}</td>
+                                    <td>
+										<div class="dropdown">
+                                            <a class="btn btn-outline-primary btn-sm" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <button class="dropdown-item" type="button" onclick="edit($!{role.id})">编辑</button>
+                                                <button class="dropdown-item" type="button" onclick="permission($!{role.id})">分配权限</button>
+                                            </div>
+                                        </div>
+									</td>
                                 </tr>
 								#end
                                 </tbody>
@@ -52,4 +62,12 @@
         </div>
     </div>
 </main>
+<script type="text/javascript">
+	function edit(roleId){
+		window.location.href="#springUrl('/op/role/edit')?roleId="+roleId;
+	}
+	function permission(roleId){
+		window.location.href="#springUrl('/op/role/resources')?roleId="+roleId;
+	}
+</script>
 <!-- end::main content -->
