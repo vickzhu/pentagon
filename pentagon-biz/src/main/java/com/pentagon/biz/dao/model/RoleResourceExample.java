@@ -243,6 +243,66 @@ public class RoleResourceExample {
             addCriterion("role_id not between", value1, value2, "roleId");
             return (Criteria) this;
         }
+
+        public Criteria andResourceIdIsNull() {
+            addCriterion("resource_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdIsNotNull() {
+            addCriterion("resource_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdEqualTo(Long value) {
+            addCriterion("resource_id =", value, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdNotEqualTo(Long value) {
+            addCriterion("resource_id <>", value, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdGreaterThan(Long value) {
+            addCriterion("resource_id >", value, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("resource_id >=", value, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdLessThan(Long value) {
+            addCriterion("resource_id <", value, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdLessThanOrEqualTo(Long value) {
+            addCriterion("resource_id <=", value, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdIn(List<Long> values) {
+            addCriterion("resource_id in", values, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdNotIn(List<Long> values) {
+            addCriterion("resource_id not in", values, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdBetween(Long value1, Long value2) {
+            addCriterion("resource_id between", value1, value2, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdNotBetween(Long value1, Long value2) {
+            addCriterion("resource_id not between", value1, value2, "resourceId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

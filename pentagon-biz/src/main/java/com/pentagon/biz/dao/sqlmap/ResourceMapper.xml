@@ -226,4 +226,16 @@
       uri = #{uri,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectByRole" parameterType="java.util.List" resultMap="BaseResultMap">
+    select 
+    r.*
+    from 
+    	role_resource rr 
+    left join 
+    	resource r on rr.role_id = r.id
+    where rr.role_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+    #{item}
+    </foreach>
+  </select>
 </mapper>

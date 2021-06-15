@@ -2,8 +2,10 @@ package com.pentagon.biz.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -15,8 +17,11 @@ import com.gandalf.framework.mybatis.BaseMapper;
 import com.gandalf.framework.mybatis.BaseServiceImpl;
 import com.pentagon.biz.cache.ResourceCache;
 import com.pentagon.biz.dao.mapper.ResourceMapper;
+import com.pentagon.biz.dao.mapper.RoleResourceMapper;
 import com.pentagon.biz.dao.model.Resource;
 import com.pentagon.biz.dao.model.ResourceExample;
+import com.pentagon.biz.dao.model.RoleResource;
+import com.pentagon.biz.dao.model.RoleResourceExample;
 import com.pentagon.biz.dto.ResourceTree;
 import com.pentagon.biz.service.ResourceService;
 
@@ -25,6 +30,8 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, ResourceExamp
 
 	@Autowired
 	private ResourceMapper mapper;
+	@Autowired
+	private RoleResourceMapper rrMapper;
 	
 	private static Lock lock = new ReentrantLock();
 	
@@ -89,14 +96,21 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, ResourceExamp
 	}
 
 	@Override
-	public List<Resource> getResourcesForRole(Long roleId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<Long> getResourcesForRole(Long roleId) {
+		RoleResourceExample example = new RoleResourceExample();
+		RoleResourceExample.Criteria criteria = example.createCriteria();
+		criteria.andRoleIdEqualTo(roleId);
+		List<RoleResource> rrList = rrMapper.selectByExample(example);
+		Set<Long> resourceIdSet = new HashSet<Long>();
+		for (RoleResource roleResource : rrList) {
+			resourceIdSet.add(roleResource.getResourceId());
+		}
+		return resourceIdSet;
 	}
 
 	@Override
 	public List<Resource> getResourcesForRoles(Long[] roleIds) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	

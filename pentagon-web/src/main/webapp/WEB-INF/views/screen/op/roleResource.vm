@@ -43,11 +43,13 @@
             <div class="card-body">
                 <h5 class="card-title">角色权限分配</h5>
 				<form action="#springUrl('op/role/resource')" method="post">
+				<input name="roleId" type="hidden" value="$!{roleId}"/>
                 <div class="table-responsive">
                     <div id="tree" class=" fl tree">
 						<ul class="yn-tree" id="yn_tree1"></ul>
 					</div>
                 </div>
+				<button type="button" class="btn btn-primary" onclick="submitForm();">Add now</button>
 				</form>
             </div>
         </div>
@@ -79,7 +81,8 @@
 	yntree.data[0].children[1].spread(true);
 	yntree.data[0].children[1].children[2].spread(true);
 	
-	alert(yntree.getValues());
-	
+	function submitForm(){
+		alert(yntree.getValues());
+	}
 	
 </script>

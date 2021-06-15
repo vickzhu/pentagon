@@ -4,9 +4,7 @@
   <resultMap id="BaseResultMap" type="com.pentagon.biz.dao.model.RoleResource">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="role_id" jdbcType="BIGINT" property="roleId" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.pentagon.biz.dao.model.RoleResource">
-    <result column="resource_id" jdbcType="LONGVARCHAR" property="resourceId" />
+    <result column="resource_id" jdbcType="BIGINT" property="resourceId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,30 +65,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, role_id
+    id, role_id, resource_id
   </sql>
-  <sql id="Blob_Column_List">
-    resource_id
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.pentagon.biz.dao.model.RoleResourceExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from role_resource
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-    <if test="offset != null and offset &gt; -1">
-      limit ${offset},${rows}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.pentagon.biz.dao.model.RoleResourceExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -108,11 +84,9 @@
       limit ${offset},${rows}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from role_resource
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -131,7 +105,7 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into role_resource (role_id, resource_id)
-    values (#{roleId,jdbcType=BIGINT}, #{resourceId,jdbcType=LONGVARCHAR})
+    values (#{roleId,jdbcType=BIGINT}, #{resourceId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.pentagon.biz.dao.model.RoleResource">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -151,7 +125,7 @@
         #{roleId,jdbcType=BIGINT},
       </if>
       <if test="resourceId != null">
-        #{resourceId,jdbcType=LONGVARCHAR},
+        #{resourceId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -171,18 +145,9 @@
         role_id = #{record.roleId,jdbcType=BIGINT},
       </if>
       <if test="record.resourceId != null">
-        resource_id = #{record.resourceId,jdbcType=LONGVARCHAR},
+        resource_id = #{record.resourceId,jdbcType=BIGINT},
       </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update role_resource
-    set id = #{record.id,jdbcType=BIGINT},
-      role_id = #{record.roleId,jdbcType=BIGINT},
-      resource_id = #{record.resourceId,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -190,7 +155,8 @@
   <update id="updateByExample" parameterType="map">
     update role_resource
     set id = #{record.id,jdbcType=BIGINT},
-      role_id = #{record.roleId,jdbcType=BIGINT}
+      role_id = #{record.roleId,jdbcType=BIGINT},
+      resource_id = #{record.resourceId,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -202,20 +168,24 @@
         role_id = #{roleId,jdbcType=BIGINT},
       </if>
       <if test="resourceId != null">
-        resource_id = #{resourceId,jdbcType=LONGVARCHAR},
+        resource_id = #{resourceId,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pentagon.biz.dao.model.RoleResource">
-    update role_resource
-    set role_id = #{roleId,jdbcType=BIGINT},
-      resource_id = #{resourceId,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.pentagon.biz.dao.model.RoleResource">
     update role_resource
-    set role_id = #{roleId,jdbcType=BIGINT}
+    set role_id = #{roleId,jdbcType=BIGINT},
+      resource_id = #{resourceId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <insert id="batchInsert" useGeneratedKeys="true">
+    insert into 
+    	role_resource (role_id, resource_id)
+    values 
+    <foreach collection="resourceIds" index="index" item="ri" separator=",">
+    (#{roleId,jdbcType=BIGINT}, #{ri,jdbcType=BIGINT})
+    </foreach>
+  </insert>
 </mapper>

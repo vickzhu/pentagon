@@ -5,7 +5,7 @@ public class RoleResource {
 
     private Long roleId;
 
-    private String resourceId;
+    private Long resourceId;
 
     public Long getId() {
         return id;
@@ -23,11 +23,11 @@ public class RoleResource {
         this.roleId = roleId;
     }
 
-    public String getResourceId() {
+    public Long getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(String resourceId) {
-        this.resourceId = resourceId == null ? null : resourceId.trim();
+    public void setResourceId(Long resourceId) {
+        this.resourceId = resourceId;
     }
 }

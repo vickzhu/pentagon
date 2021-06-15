@@ -10,4 +10,6 @@ public interface RoleService extends BaseService<Role, RoleExample> {
 
 	public List<Role> getRolesByUser(Long userId);
 	
+	public void assignResource(Long roleId, Long[] resourceIds);
+	
 }
