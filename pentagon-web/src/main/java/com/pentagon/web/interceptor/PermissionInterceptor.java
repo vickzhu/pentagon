@@ -5,14 +5,18 @@
  */
 package com.pentagon.web.interceptor;
 
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.gandalf.framework.constant.SymbolConstant;
 
 /**
  * 类PermissionInterceptor.java的实现描述：权限拦截器
@@ -51,7 +55,17 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
         if(user != null) {
         	return Boolean.TRUE;
         }
-        response.sendRedirect(request.getContextPath()+"/login");
+        StringBuilder sb = new StringBuilder();
+        sb.append(request.getContextPath());
+        sb.append("/login?redirect=");
+        StringBuilder redirectUrl = new StringBuilder();
+        redirectUrl.append(request.getRequestURL());
+        if(StringUtils.isNotBlank(request.getQueryString())) {
+        	redirectUrl.append(SymbolConstant.QUESTION);
+        	redirectUrl.append(request.getQueryString());
+        }
+        sb.append(URLEncoder.encode(redirectUrl.toString(), "UTF-8"));
+        response.sendRedirect(sb.toString());
         return Boolean.FALSE;
     }
 

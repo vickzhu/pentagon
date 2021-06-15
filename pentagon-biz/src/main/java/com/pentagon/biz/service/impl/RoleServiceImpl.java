@@ -1,7 +1,8 @@
 package com.pentagon.biz.service.impl;
 
-import javax.annotation.Resource;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gandalf.framework.mybatis.BaseMapper;
@@ -14,12 +15,18 @@ import com.pentagon.biz.service.RoleService;
 @Service
 public class RoleServiceImpl extends BaseServiceImpl<Role, RoleExample> implements RoleService {
 	
-	@Resource
+	@Autowired
 	private RoleMapper mapper;
 
 	@Override
 	protected BaseMapper<Role, RoleExample> getMapper() {
 		return mapper;
-	}	
+	}
+
+	@Override
+	public List<Role> getRolesByUser(Long userId) {
+		List<Long> roleIds = mapper.selectByUserId(userId);
+		return null;
+	}
 
 }

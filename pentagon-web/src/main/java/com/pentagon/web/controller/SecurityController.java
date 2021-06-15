@@ -5,12 +5,18 @@
  */
 package com.pentagon.web.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,17 +36,25 @@ import com.pentagon.biz.service.UserService;
 @Controller
 public class SecurityController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(SecurityController.class);
+	
 	@Resource
 	private UserService userService;
+	
+	private static final String defaulRedirectURL = "dashboard";
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
+    	String redirectUrl = request.getParameter("redirect");
         ModelAndView mav = new ModelAndView("login");
+        if(StringUtils.isNotBlank(redirectUrl)) {
+        	mav.addObject("redirect", redirectUrl);
+        }
         return mav;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String doLogin(HttpServletRequest request, HttpServletResponse response) {
+    public String doLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String captcha = request.getParameter("captcha");
@@ -56,7 +70,24 @@ public class SecurityController {
         	return null;
         }
         request.getSession().setAttribute("user", user);
-        return "redirect:dashboard";
+        String redirectUrl = getRedirectUrl(request);
+//        response.sendRedirect(redirectUrl);
+        return "redirect:" + redirectUrl;
+    }
+    
+    private String getRedirectUrl(HttpServletRequest request) {
+    	String redirectUrl = request.getParameter("redirect");
+        if(StringUtils.isNotBlank(redirectUrl)) {
+        	try {
+				redirectUrl = URLDecoder.decode(redirectUrl, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				redirectUrl = defaulRedirectURL;
+				logger.error("Can't decode url:" + redirectUrl, e);
+			}
+        } else {
+        	redirectUrl = defaulRedirectURL;
+        }
+        return redirectUrl;
     }
     
     @RequestMapping(value = "/register", method = RequestMethod.GET)

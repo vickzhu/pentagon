@@ -15,3 +15,10 @@
     	#end
 	</select>
 #end
+
+#macro(showResource $dataList)
+    #foreach( $data in $dataList )
+		#if($velocityCount > 1),#end
+		{name: "$!{data.name}",inputName: "res",value: $!{data.id},checked: false,#if(${data.treeList})children:[#showResource(${data.treeList})],#end disabled: false}
+    #end
+#end

@@ -184,63 +184,63 @@ public class ResourceExample {
             return (Criteria) this;
         }
 
-        public Criteria andParentIdIsNull() {
-            addCriterion("parent_id is null");
+        public Criteria andBaseMenuIdIsNull() {
+            addCriterion("base_menu_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdIsNotNull() {
-            addCriterion("parent_id is not null");
+        public Criteria andBaseMenuIdIsNotNull() {
+            addCriterion("base_menu_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdEqualTo(Long value) {
-            addCriterion("parent_id =", value, "parentId");
+        public Criteria andBaseMenuIdEqualTo(Long value) {
+            addCriterion("base_menu_id =", value, "baseMenuId");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdNotEqualTo(Long value) {
-            addCriterion("parent_id <>", value, "parentId");
+        public Criteria andBaseMenuIdNotEqualTo(Long value) {
+            addCriterion("base_menu_id <>", value, "baseMenuId");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdGreaterThan(Long value) {
-            addCriterion("parent_id >", value, "parentId");
+        public Criteria andBaseMenuIdGreaterThan(Long value) {
+            addCriterion("base_menu_id >", value, "baseMenuId");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("parent_id >=", value, "parentId");
+        public Criteria andBaseMenuIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("base_menu_id >=", value, "baseMenuId");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdLessThan(Long value) {
-            addCriterion("parent_id <", value, "parentId");
+        public Criteria andBaseMenuIdLessThan(Long value) {
+            addCriterion("base_menu_id <", value, "baseMenuId");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdLessThanOrEqualTo(Long value) {
-            addCriterion("parent_id <=", value, "parentId");
+        public Criteria andBaseMenuIdLessThanOrEqualTo(Long value) {
+            addCriterion("base_menu_id <=", value, "baseMenuId");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdIn(List<Long> values) {
-            addCriterion("parent_id in", values, "parentId");
+        public Criteria andBaseMenuIdIn(List<Long> values) {
+            addCriterion("base_menu_id in", values, "baseMenuId");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdNotIn(List<Long> values) {
-            addCriterion("parent_id not in", values, "parentId");
+        public Criteria andBaseMenuIdNotIn(List<Long> values) {
+            addCriterion("base_menu_id not in", values, "baseMenuId");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdBetween(Long value1, Long value2) {
-            addCriterion("parent_id between", value1, value2, "parentId");
+        public Criteria andBaseMenuIdBetween(Long value1, Long value2) {
+            addCriterion("base_menu_id between", value1, value2, "baseMenuId");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdNotBetween(Long value1, Long value2) {
-            addCriterion("parent_id not between", value1, value2, "parentId");
+        public Criteria andBaseMenuIdNotBetween(Long value1, Long value2) {
+            addCriterion("base_menu_id not between", value1, value2, "baseMenuId");
             return (Criteria) this;
         }
 

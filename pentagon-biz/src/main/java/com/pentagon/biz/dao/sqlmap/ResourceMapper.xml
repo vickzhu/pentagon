@@ -3,9 +3,9 @@
 <mapper namespace="com.pentagon.biz.dao.mapper.ResourceMapper">
   <resultMap id="BaseResultMap" type="com.pentagon.biz.dao.model.Resource">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="base_menu_id" jdbcType="BIGINT" property="baseMenuId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="is_menu" jdbcType="TINYINT" property="isMenu" />
+    <result column="is_menu" jdbcType="INTEGER" property="isMenu" />
     <result column="menu_order" jdbcType="INTEGER" property="menuOrder" />
     <result column="uri" jdbcType="VARCHAR" property="uri" />
   </resultMap>
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, parent_id, name, is_menu, menu_order, uri
+    id, base_menu_id, name, is_menu, menu_order, uri
   </sql>
   <select id="selectByExample" parameterType="com.pentagon.biz.dao.model.ResourceExample" resultMap="BaseResultMap">
     select
@@ -107,9 +107,9 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into resource (parent_id, name, is_menu, 
+    insert into resource (base_menu_id, name, is_menu, 
       menu_order, uri)
-    values (#{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{isMenu,jdbcType=TINYINT}, 
+    values (#{baseMenuId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{isMenu,jdbcType=INTEGER}, 
       #{menuOrder,jdbcType=INTEGER}, #{uri,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pentagon.biz.dao.model.Resource">
@@ -118,8 +118,8 @@
     </selectKey>
     insert into resource
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="parentId != null">
-        parent_id,
+      <if test="baseMenuId != null">
+        base_menu_id,
       </if>
       <if test="name != null">
         name,
@@ -135,14 +135,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="parentId != null">
-        #{parentId,jdbcType=BIGINT},
+      <if test="baseMenuId != null">
+        #{baseMenuId,jdbcType=BIGINT},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="isMenu != null">
-        #{isMenu,jdbcType=TINYINT},
+        #{isMenu,jdbcType=INTEGER},
       </if>
       <if test="menuOrder != null">
         #{menuOrder,jdbcType=INTEGER},
@@ -164,14 +164,14 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.parentId != null">
-        parent_id = #{record.parentId,jdbcType=BIGINT},
+      <if test="record.baseMenuId != null">
+        base_menu_id = #{record.baseMenuId,jdbcType=BIGINT},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.isMenu != null">
-        is_menu = #{record.isMenu,jdbcType=TINYINT},
+        is_menu = #{record.isMenu,jdbcType=INTEGER},
       </if>
       <if test="record.menuOrder != null">
         menu_order = #{record.menuOrder,jdbcType=INTEGER},
@@ -187,9 +187,9 @@
   <update id="updateByExample" parameterType="map">
     update resource
     set id = #{record.id,jdbcType=BIGINT},
-      parent_id = #{record.parentId,jdbcType=BIGINT},
+      base_menu_id = #{record.baseMenuId,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
-      is_menu = #{record.isMenu,jdbcType=TINYINT},
+      is_menu = #{record.isMenu,jdbcType=INTEGER},
       menu_order = #{record.menuOrder,jdbcType=INTEGER},
       uri = #{record.uri,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -199,14 +199,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.pentagon.biz.dao.model.Resource">
     update resource
     <set>
-      <if test="parentId != null">
-        parent_id = #{parentId,jdbcType=BIGINT},
+      <if test="baseMenuId != null">
+        base_menu_id = #{baseMenuId,jdbcType=BIGINT},
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="isMenu != null">
-        is_menu = #{isMenu,jdbcType=TINYINT},
+        is_menu = #{isMenu,jdbcType=INTEGER},
       </if>
       <if test="menuOrder != null">
         menu_order = #{menuOrder,jdbcType=INTEGER},
@@ -219,9 +219,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pentagon.biz.dao.model.Resource">
     update resource
-    set parent_id = #{parentId,jdbcType=BIGINT},
+    set base_menu_id = #{baseMenuId,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},
-      is_menu = #{isMenu,jdbcType=TINYINT},
+      is_menu = #{isMenu,jdbcType=INTEGER},
       menu_order = #{menuOrder,jdbcType=INTEGER},
       uri = #{uri,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}

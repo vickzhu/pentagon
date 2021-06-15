@@ -3,7 +3,7 @@ package com.pentagon.biz.dao.model;
 public class Resource {
     private Long id;
 
-    private Long parentId;
+    private Long baseMenuId;
 
     private String name;
 
@@ -21,12 +21,12 @@ public class Resource {
         this.id = id;
     }
 
-    public Long getParentId() {
-        return parentId;
+    public Long getBaseMenuId() {
+        return baseMenuId;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setBaseMenuId(Long baseMenuId) {
+        this.baseMenuId = baseMenuId;
     }
 
     public String getName() {

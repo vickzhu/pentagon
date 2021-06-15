@@ -42,6 +42,7 @@
             <p>Sign in to continue.</p>
             <form id="loginform" method="post" action="login" method="post">
 				$!{tokenTool.hiddenField}
+				<input name="redirect" type="hidden" value="$!{redirect}"/>
                 <div class="form-group mb-4">
                     <input name="username" type="text" class="form-control form-control-lg" id="exampleInputEmail1" autofocus placeholder="Email or username">
                 </div>
