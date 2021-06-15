@@ -6,6 +6,10 @@
     <result column="role_id" jdbcType="BIGINT" property="roleId" />
     <result column="resource_id" jdbcType="BIGINT" property="resourceId" />
   </resultMap>
+  <resultMap id="roleUriMap" type="com.pentagon.biz.dto.RoleUri">
+  	<result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -188,4 +192,15 @@
     (#{roleId,jdbcType=BIGINT}, #{ri,jdbcType=BIGINT})
     </foreach>
   </insert>
+  <select id="selectRoleAndUri" resultMap="roleUriMap">
+    select 
+    	r.id role_id, res.uri
+    from 
+    	role_resource rr
+    left join
+    	role r on rr.role_id = r.id
+    left join
+    	resource res on res.id=rr.resource_id
+    where r.enable=1
+  </select>
 </mapper>

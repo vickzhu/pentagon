@@ -56,7 +56,7 @@
                     event.stopPropagation();
                 if (form.checkValidity() === true) {
 					var params = $("#roleEditForm").serialize();
-					$.post("#springUrl('/op/role/edit')",params,function(result){
+					$.post('#springUrl("/op/role/edit")',params,function(result){
         				if(result.success){
         					alert("保存成功");
         				}else {
