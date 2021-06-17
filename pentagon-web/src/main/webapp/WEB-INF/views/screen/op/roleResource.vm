@@ -49,7 +49,7 @@
 						<ul class="yn-tree" id="yn_tree1"></ul>
 					</div>
                 </div>
-				<button type="button" class="btn btn-primary" onclick="submitForm();">Add now</button>
+				<button type="button" class="btn btn-primary" onclick="submitForm();">确定</button>
 				</form>
             </div>
         </div>
