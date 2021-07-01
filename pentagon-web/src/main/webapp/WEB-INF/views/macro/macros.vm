@@ -16,9 +16,9 @@
 	</select>
 #end
 
-#macro(showResource $dataList)
-    #foreach( $data in $dataList )
+#macro(showResource $allResources $activeResources)
+    #foreach( $data in $allResources )
 		#if($velocityCount > 1),#end
-		{name: "$!{data.name}",inputName: "res",value: $!{data.id},checked: false,#if(${data.treeList})children:[#showResource(${data.treeList})],#end disabled: false}
+		{name: "$!{data.name}",inputName: "res",value: $!{data.id},checked: #if(${activeResources.contains(${data.id})}) true #else false#end,#if(${data.treeList})children:[#showResource(${data.treeList})],#end disabled: false}
     #end
 #end

@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gandalf.framework.encrypt.PHPass;
 import com.gandalf.framework.util.StringUtil;
 import com.gandalf.framework.web.tool.RequestUtil;
+import com.gandalf.framework.web.tool.SessionHolder;
 import com.pentagon.biz.dao.model.User;
 import com.pentagon.biz.service.UserService;
 
@@ -69,7 +70,7 @@ public class SecurityController {
         if(user.getEnable() == 0) {
         	return null;
         }
-        request.getSession().setAttribute("user", user);
+        SessionHolder.setAttribute("user", user);
         String redirectUrl = getRedirectUrl(request);
 //        response.sendRedirect(redirectUrl);
         return "redirect:" + redirectUrl;

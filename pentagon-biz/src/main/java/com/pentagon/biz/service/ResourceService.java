@@ -16,4 +16,6 @@ public interface ResourceService extends BaseService<Resource, ResourceExample> 
 	
 	public List<Resource> getResourcesForRoles(Long[] roleIds);
 	
+	public List<Resource> selectByUser(Long userId);
+	
 }

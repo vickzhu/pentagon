@@ -42,7 +42,8 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">角色权限分配</h5>
-				<form action="#springUrl('op/role/resource')" method="post">
+				<form id="rrForm" method="post">
+				$!{tokenTool.hiddenField}
 				<input name="roleId" type="hidden" value="$!{roleId}"/>
                 <div class="table-responsive">
                     <div id="tree" class=" fl tree">
@@ -65,7 +66,7 @@
 		},
 		// 是否严格的遵循父子互相关联的做法
 		checkStrictly: true,
-		data:[#showResource($resourceList)]
+		data:[#showResource($resourceList,$roleResources)]
 	};
 	var yntree = new YnTree(document.getElementById("tree"), treeData);
 	//var yntree = new YnTree(document.getElementById("tree"), {data: []});
@@ -82,7 +83,15 @@
 	yntree.data[0].children[1].children[2].spread(true);
 	
 	function submitForm(){
-		alert(yntree.getValues());
+		//var rs = yntree.getValues();
+		var params = $("#rrForm").serialize();
+		$.post('#springUrl("/op/role/resources")',params,function(result){
+			if(result.success){
+				alert("保存成功");
+			}else {
+				alert("保存失败");
+			}
+		});
 	}
 	
 </script>

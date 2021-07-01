@@ -113,5 +113,10 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, ResourceExamp
 		
 		return null;
 	}
+
+	@Override
+	public List<Resource> selectByUser(Long userId) {
+		return mapper.selectByUser(userId);
+	}
 	
 }

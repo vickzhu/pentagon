@@ -1,6 +1,7 @@
 package com.pentagon.web.op.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -78,16 +79,17 @@ public class RoleController extends BaseController {
 	public ModelAndView roleResource(HttpServletRequest request,@RequestParam Long roleId) {
 		ModelAndView mav = new ModelAndView("op/roleResource");
 		List<ResourceTree> resourceList = resourceService.selectAllFromCache();
+		Set<Long> roleResources = resourceService.getResourcesForRole(roleId);
 		mav.addObject("resourceList", resourceList);
+		mav.addObject("roleResources", roleResources);
 		mav.addObject("roleId", roleId);
 		return mav;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/resources", method = RequestMethod.POST)
-	public AjaxResult saveRoleResource(HttpServletRequest request) {
-		String roleId = request.getParameter("roleId");
-		String[] resources = request.getParameterValues("res");
+	public AjaxResult saveRoleResource(HttpServletRequest request,@RequestParam Long roleId,Long[] res) {
+		roleService.assignResource(roleId, res);
 		return new AjaxResult(true, null);
 	}
 	
