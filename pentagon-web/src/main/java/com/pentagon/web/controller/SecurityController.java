@@ -9,24 +9,28 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Date;
+import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gandalf.framework.encrypt.PHPass;
 import com.gandalf.framework.util.StringUtil;
 import com.gandalf.framework.web.tool.RequestUtil;
 import com.gandalf.framework.web.tool.SessionHolder;
+import com.pentagon.biz.dao.model.Resource;
 import com.pentagon.biz.dao.model.User;
+import com.pentagon.biz.service.ResourceService;
 import com.pentagon.biz.service.UserService;
 
 /**
@@ -39,8 +43,10 @@ public class SecurityController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SecurityController.class);
 	
-	@Resource
+	@Autowired
 	private UserService userService;
+	@Autowired
+	private ResourceService resourceService;
 	
 	private static final String defaulRedirectURL = "dashboard";
 
@@ -55,7 +61,7 @@ public class SecurityController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String doLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String doLogin(HttpServletRequest request, HttpServletResponse response, final RedirectAttributes redirectAttributes) throws IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String captcha = request.getParameter("captcha");
@@ -64,16 +70,29 @@ public class SecurityController {
         }
         Object captchaObj = request.getSession(false).getAttribute("captcha");
         if (captchaObj == null || !captcha.equalsIgnoreCase(String.valueOf(captchaObj))) {// 验证码不存在或已过期
-        	return null;
+        	redirectAttributes.addFlashAttribute("errorMsg", "验证码错误");
+            return "redirect:/login";
         }
         User user = userService.selectByUsername(username);
         if(user.getEnable() == 0) {
-        	return null;
+        	redirectAttributes.addFlashAttribute("errorMsg", "该用户已禁用");
+            return "redirect:/login";
+        }
+        if(!PHPass.isMatch(password, user.getPassword())) {
+        	redirectAttributes.addFlashAttribute("errorMsg", "账号密码错误");
+        	return "redirect:/login";
         }
         SessionHolder.setAttribute("user", user);
         String redirectUrl = getRedirectUrl(request);
 //        response.sendRedirect(redirectUrl);
         return "redirect:" + redirectUrl;
+    }
+    
+    private void loadPermission(User user) {
+    	List<Resource> resourceList = resourceService.selectByUser(user.getId());
+    	for (Resource resource : resourceList) {
+			
+		}
     }
     
     private String getRedirectUrl(HttpServletRequest request) {

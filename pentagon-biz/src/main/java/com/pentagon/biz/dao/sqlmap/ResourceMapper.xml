@@ -242,10 +242,14 @@
     select
     	r.*
     from
-    	user_role ur 
+    	user_role ur
     inner join
-    	resouce r on ur.role_id = r.id
+    	role_resource rr on ur.role_id = rr.role_id
+    inner join
+    	resource r on rr.resource_id = r.id
     where
     	ur.user_id = #{userId}
+    group by r.id
   </select>
+  
 </mapper>

@@ -60,32 +60,17 @@
 <script type="text/javascript" src="resources/js/yntree.js"></script>
 <script type="text/javascript">
 	var treeData = {
-		// 复选框change事件
-		onchange: function (input, yntree){
-			console.log(this);
-		},
 		// 是否严格的遵循父子互相关联的做法
 		checkStrictly: true,
 		data:[#showResource($resourceList,$roleResources)]
 	};
 	var yntree = new YnTree(document.getElementById("tree"), treeData);
-	//var yntree = new YnTree(document.getElementById("tree"), {data: []});
-	console.log(treeData);
-	//new YnTree(document.getElementById("tree2"), treeData);
-	//yntree.data[0].children[1].children[2].select(true);
-	//yntree.data[0].children[1].select(true);
-	//yntree.data[0].select(true);
-	//yntree.data[0].children[1].children[2].selectUp(true);
-	//console.log(yntree.data[0].children[0].children[1].disable(true));
-	
-	yntree.data[0].spread(true);
-	yntree.data[0].children[1].spread(true);
-	yntree.data[0].children[1].children[2].spread(true);
-	
+	$(".yn-tree li").removeClass("shrink");//删除收起
+	$(".yn-tree li").addClass("spread");//添加展开
 	function submitForm(){
 		//var rs = yntree.getValues();
 		var params = $("#rrForm").serialize();
-		$.post('#springUrl("/op/role/resources")',params,function(result){
+		$.post('#springUrl("/op/role/resources")', params, function(result){
 			if(result.success){
 				alert("保存成功");
 			}else {
@@ -93,5 +78,4 @@
 			}
 		});
 	}
-	
 </script>

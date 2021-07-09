@@ -53,6 +53,9 @@
                     <input name="captcha" type="text" class="form-control form-control-lg col-md-8" id="captcha" placeholder="Captcha"/>
 					<a href="javascript:;">  <img src="" title="点击刷新" id="captchaImg" /></a>
                 </div>
+				<div class="form-group mb-4">
+                    $!{errorMsg}
+                </div>
                 <button class="btn btn-primary btn-lg btn-block btn-uppercase mb-4">Sign In</button>
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div class="custom-control custom-checkbox">
