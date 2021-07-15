@@ -8,12 +8,18 @@ package com.pentagon.web.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +36,7 @@ import com.gandalf.framework.web.tool.RequestUtil;
 import com.gandalf.framework.web.tool.SessionHolder;
 import com.pentagon.biz.dao.model.Resource;
 import com.pentagon.biz.dao.model.User;
+import com.pentagon.biz.dto.ResourceTree;
 import com.pentagon.biz.service.ResourceService;
 import com.pentagon.biz.service.UserService;
 
@@ -82,6 +89,7 @@ public class SecurityController {
         	redirectAttributes.addFlashAttribute("errorMsg", "账号密码错误");
         	return "redirect:/login";
         }
+        loadPermission(user);
         SessionHolder.setAttribute("user", user);
         String redirectUrl = getRedirectUrl(request);
 //        response.sendRedirect(redirectUrl);
@@ -90,10 +98,52 @@ public class SecurityController {
     
     private void loadPermission(User user) {
     	List<Resource> resourceList = resourceService.selectByUser(user.getId());
+    	Map<Long, List<ResourceTree>> subResourceMap = new HashMap<Long, List<ResourceTree>>();
+    	Set<String> permissionSet = new HashSet<String>();
     	for (Resource resource : resourceList) {
-			
+    		permissionSet.add(resource.getUri());
+    		if(resource.getIsMenu() == 0) {
+    			continue;
+    		}
+    		Long baseMenuId = resource.getBaseMenuId();
+			List<ResourceTree> treeList = subResourceMap.get(baseMenuId);
+			if(treeList == null) {
+				treeList = new ArrayList<ResourceTree>();
+				subResourceMap.put(resource.getBaseMenuId(), treeList);
+			}
+			ResourceTree rt = new ResourceTree();
+			rt.setId(resource.getId());
+			rt.setBaseMenuId(resource.getBaseMenuId());
+			rt.setIsMenu(resource.getIsMenu());
+			rt.setName(resource.getName());
+			treeList.add(rt);
 		}
+    	ResourceTree resourceTree = new ResourceTree();
+		List<ResourceTree> rootList = subResourceMap.get(0l);//获根resource
+		resourceTree.setTreeList(rootList);
+		buildSubTree(resourceTree, subResourceMap);
+		SessionHolder.setAttribute("menuTree", resourceTree);
+		SessionHolder.setAttribute("permission", permissionSet);
     }
+    
+    /**
+	 * 递归构建resource树形结构
+	 * @param resourceTree	根resource
+	 * @param subResourceMap	所有menu下的一级resource
+	 */
+	private void buildSubTree(ResourceTree resourceTree, Map<Long, List<ResourceTree>> subResourceMap) {
+		List<ResourceTree> resourceList = resourceTree.getTreeList();
+		if(CollectionUtils.isEmpty(resourceList)) {
+			return;
+		}
+		for (ResourceTree rt : resourceList) {
+			List<ResourceTree> rtList = subResourceMap.get(rt.getId());
+			rt.setTreeList(rtList);
+			if(rt.getIsMenu() == 1) {//菜单
+				buildSubTree(rt, subResourceMap);
+			}
+		}
+	}
     
     private String getRedirectUrl(HttpServletRequest request) {
     	String redirectUrl = request.getParameter("redirect");

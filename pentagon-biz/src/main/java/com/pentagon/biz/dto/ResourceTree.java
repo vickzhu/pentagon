@@ -1,5 +1,6 @@
 package com.pentagon.biz.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,9 @@ import java.util.List;
  * @author vick.zhu
  *
  */
-public class ResourceTree {
+public class ResourceTree implements Serializable {
+
+	private static final long serialVersionUID = -4846435992364353556L;
 
 	private Long id;
 

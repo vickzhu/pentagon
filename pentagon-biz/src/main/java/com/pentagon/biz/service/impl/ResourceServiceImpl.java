@@ -33,13 +33,16 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, ResourceExamp
 	@Autowired
 	private RoleResourceMapper rrMapper;
 	
-	private static Lock lock = new ReentrantLock();
+	private static Lock treeLock = new ReentrantLock();
 	
 	@Override
 	protected BaseMapper<Resource, ResourceExample> getMapper() {
 		return mapper;
 	}
 
+	/**
+	 * 每一个resource都有一个base_menu_id，表示该resoruce属于哪个menu下
+	 */
 	@Override
 	public List<ResourceTree> selectAllFromCache() {
 		long currentTime = System.currentTimeMillis();
@@ -47,7 +50,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, ResourceExamp
 		if(currentTime < expireTime) {
 			return ResourceCache.getEntityList();
 		}
-		if(lock.tryLock()) {
+		if(treeLock.tryLock()) {
 			try {
 				ResourceExample example = new ResourceExample();
 				ResourceExample.Criteria criteria = example.createCriteria();
@@ -55,7 +58,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, ResourceExamp
 				example.setOrderByClause("base_menu_id asc, menu_order asc");
 				List<Resource> result = mapper.selectByExample(example); 
 				Map<Long, List<ResourceTree>> subResourceMap = new HashMap<Long, List<ResourceTree>>();
-				for (Resource resource : result) {
+				for (Resource resource : result) {//统计每个menu下的第一级resource
 					Long baseMenuId = resource.getBaseMenuId();
 					List<ResourceTree> treeList = subResourceMap.get(baseMenuId);
 					if(treeList == null) {
@@ -70,17 +73,22 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, ResourceExamp
 					treeList.add(rt);
 				}
 				ResourceTree resourceTree = new ResourceTree();
-				List<ResourceTree> resourceList = subResourceMap.get(0l);
+				List<ResourceTree> resourceList = subResourceMap.get(0l);//获根resource
 				resourceTree.setTreeList(resourceList);
 				buildSubTree(resourceTree, subResourceMap);
 				ResourceCache.refreshCache(resourceList);
 			} finally {
-				lock.unlock();
+				treeLock.unlock();
 			}
 		}
 		return ResourceCache.getEntityList();
 	}
 	
+	/**
+	 * 递归构建resource树形结构
+	 * @param resourceTree	根resource
+	 * @param subResourceMap	所有menu下的一级resource
+	 */
 	private void buildSubTree(ResourceTree resourceTree, Map<Long, List<ResourceTree>> subResourceMap) {
 		List<ResourceTree> resourceList = resourceTree.getTreeList();
 		if(CollectionUtils.isEmpty(resourceList)) {
